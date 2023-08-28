@@ -67,4 +67,4 @@ jobs:
           PATH: "./apps"
           EMAIL: "ljsteadman@gmail.com"
           NAME: "Luke Steadman"
-          TAG: ${{ steps.meta.outputs.tags }}
+          TAG: ${{ github.ref_name }}
