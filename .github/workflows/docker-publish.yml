@@ -57,9 +57,10 @@ jobs:
           DIGEST: ${{ steps.build-and-push.outputs.digest }}
         run: echo "${TAGS}" | xargs -I {} cosign sign --yes {}@${DIGEST}
       - name: Rollout changes via Gitops
+        if: ${{ github.ref_name != 'main' }}
         uses: steadweb/action-regex-image-updater@main
         env:
-          TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          TOKEN: ${{ secrets.GH_TOKEN }}
           IMAGE: "ghcr.io/steadweb/node18-example"
           USERNAME: "steadweb"
           ORG: "steadweb"
